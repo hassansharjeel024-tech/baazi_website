@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-heading {
+  font-family: 'Baloo 2', sans-serif;
+}
+
+.section-heading {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: -0.01em;
+}
