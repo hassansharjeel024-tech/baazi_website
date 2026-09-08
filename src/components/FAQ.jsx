@@ -38,7 +38,7 @@ export default function FAQ() {
   };
 
     return (
-    <section className="bg-[#DBE21C] py-20 px-6 md:px-12 2xl:min-h-261 2xl:flex 2xl:flex-col 2xl:justify-center">
+    <section id="faqs" className="bg-[#DBE21C] py-20 px-6 md:px-12 2xl:min-h-261 2xl:flex 2xl:flex-col 2xl:justify-center">
          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Left: Heading + Accordion */}
         <div className="w-full lg:w-1/2 min-w-0 2xl:w-166.5 2xl:max-w-166.5">
