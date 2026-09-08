@@ -7,6 +7,7 @@ const features = [
     description:
       "Dive into 100+ instant-play casual games. Short sessions, big rewards, endless fun.",
     color: "bg-purple-500",
+    glow: "168, 85, 247",
   },
   {
     icon: Calendar,
@@ -14,6 +15,7 @@ const features = [
     description:
       "Complete daily and weekly tasks to earn Carrots and unlock exclusive badges.",
     color: "bg-teal-500",
+    glow: "20, 184, 166",
   },
   {
     icon: Coins,
@@ -21,6 +23,7 @@ const features = [
     description:
       "Our virtual currency is earned through gameplay. Multiply your winnings and cash out anytime.",
     color: "bg-yellow-500",
+    glow: "234, 179, 8",
   },
   {
     icon: Gift,
@@ -28,6 +31,7 @@ const features = [
     description:
       "Redeem Carrots for gift cards, digital goods, prizes, and exclusive limited-time offers.",
     color: "bg-pink-500",
+    glow: "236, 72, 153",
   },
   {
     icon: Users,
@@ -35,6 +39,7 @@ const features = [
     description:
       "Invite friends and earn 100 Carrots each. The more you share, the more you earn.",
     color: "bg-indigo-500",
+    glow: "99, 102, 241",
   },
   {
     icon: Trophy,
@@ -42,6 +47,7 @@ const features = [
     description:
       "Compete globally or among friends. Top the leaderboard each week for cash prizes.",
     color: "bg-orange-500",
+    glow: "249, 115, 22",
   },
 ];
 
@@ -60,7 +66,7 @@ function Features() {
         className="flex flex-wrap justify-center gap-5 mt-10 mx-auto"
         style={{ maxWidth: "1200px" }}
       >
-        {features.map(({ icon: Icon, title, description, color }) => (
+        {features.map(({ icon: Icon, title, description, color, glow }) => (
           <div
             key={title}
             className="flex flex-col text-left hover:-translate-y-1 transition-transform"
@@ -68,6 +74,7 @@ function Features() {
               width: "371px",
               height: "258px",
               backgroundColor: "#1C0E2B",
+              backgroundImage: `radial-gradient(circle at top right, rgba(${glow}, 0.25) 0%, rgba(${glow}, 0) 60%)`,
               borderRadius: "24px",
               borderTop: "0.8px solid rgba(255, 107, 53, 0.19)",
               padding: "24px",

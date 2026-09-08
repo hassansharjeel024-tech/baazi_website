@@ -56,7 +56,7 @@ function CoinShop() {
           {coinPacks.map((pack, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 flex flex-col items-center text-center aspect-371/378"
+              className="bg-white rounded-xl p-6 flex flex-col items-center text-center w-full 2xl:h-94.5"
               style={{
                 border: "1px solid rgba(204,204,204,0.62)",
                 boxShadow: "0px 4px 6px -4px rgba(0,0,0,0.10)",

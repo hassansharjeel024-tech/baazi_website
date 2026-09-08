@@ -45,8 +45,16 @@ export default function GlobalRankings() {
         className="py-16 px-6 text-center"
         style={{ background: "linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)" }}
       >
-        <h1 className="section-heading text-yellow-400 text-4xl md:text-5xl mb-3">
-          GLOBAL RANKINGS
+        <h1
+          className="text-4xl md:text-5xl mb-3 uppercase"
+          style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 900,
+            color: "#DBE21C",
+          }}
+        >
+          <span className="block">GLOBAL</span>
+          <span className="block">RANKINGS</span>
         </h1>
         <p className="font-poppins text-purple-200 text-sm md:text-base">
           The highest echelon of competitive play. Climb the ranks to secure your legacy.

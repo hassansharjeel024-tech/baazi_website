@@ -17,7 +17,7 @@ function RewardsShowcase() {
       <img
         src={rewardsImage}
         alt="Rewards showcase"
-        className="mt-10 w-full max-w-3xl mx-auto h-auto"
+        className="mt-10 w-full max-w-3xl mx-auto h-auto 2xl:w-323 2xl:h-187 2xl:max-w-none"
       />
     </section>
   );

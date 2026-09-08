@@ -1,23 +1,25 @@
-import { Download, Gamepad2, Gift } from "lucide-react";
+import step1Icon from "../assets/step-1-icon.png";
+import step2Icon from "../assets/step-2-icon.png";
+import step3Icon from "../assets/step-3-icon.png";
 
 const steps = [
   {
     number: "01",
-    icon: Download,
+    icon: step1Icon,
     title: "Download & Sign Up",
     description:
       "Get the free Baazi app. Create your account in under 60 seconds and claim your 100 welcome Carrots.",
   },
   {
     number: "02",
-    icon: Gamepad2,
+    icon: step2Icon,
     title: "Play & Complete Tasks",
     description:
       "Jump through mini-games, complete daily challenges, and multiply your earnings as you play.",
   },
   {
     number: "03",
-    icon: Gift,
+    icon: step3Icon,
     title: "Earn & Redeem Rewards",
     description:
       "Convert your Carrots into gift cards, digital goods, and cash prizes. Withdraw anytime.",
@@ -38,7 +40,7 @@ function HowItWorks() {
         className="flex flex-wrap justify-center gap-5 mt-10 mx-auto"
         style={{ maxWidth: "1300px" }}
       >
-        {steps.map(({ number, icon: Icon, title, description }) => (
+        {steps.map(({ number, icon, title, description }) => (
           <div
             key={number}
             className="flex flex-col items-center text-center"
@@ -49,18 +51,18 @@ function HowItWorks() {
               borderRadius: "24px",
               borderTop: "0.8px solid rgba(196, 223, 0, 0.125)",
               padding: "32px",
+              gap: "7px",
             }}
           >
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3"
-              style={{ backgroundColor: "#DBE21C" }}
-            >
-              <Icon className="text-purple-900 w-6 h-6" />
-            </div>
-            <span className="text-yellow-400 font-extrabold text-xl mb-2">
+            <img
+              src={icon}
+              alt={title}
+              className="w-20 h-24 object-contain"
+            />
+            <span className="text-yellow-400 font-extrabold text-xl">
               {number}
             </span>
-            <h3 className="text-white font-bold text-base mb-2">{title}</h3>
+            <h3 className="text-white font-bold text-base">{title}</h3>
             <p className="text-gray-400 text-sm">{description}</p>
           </div>
         ))}
