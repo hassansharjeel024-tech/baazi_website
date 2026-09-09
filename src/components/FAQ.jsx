@@ -88,7 +88,7 @@ export default function FAQ() {
         </div>
 
         {/* Right: Mascot */}
-        <div className="w-full lg:w-1/2 min-w-0 flex justify-center lg:justify-end">
+        <div className="hidden lg:flex w-full lg:w-1/2 min-w-0 justify-center lg:justify-end">
           <img
             src={mascotImage}
             alt="Baazi mascot"

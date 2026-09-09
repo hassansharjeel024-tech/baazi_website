@@ -5,20 +5,20 @@ function GamesSection() {
   return (
     <section
       id="games"
-      className="px-6 py-16 text-center overflow-hidden relative"
+      className="px-3 sm:px-6 py-16 text-center overflow-hidden relative"
       style={{ backgroundColor: "#DBE21C" }}
     >
       <h2 className="section-heading text-2xl md:text-3xl text-gray-900">
         PLAY 100+ GAMES & EARN EVERY SESSION
       </h2>
 
-      <div className="relative mt-10 max-w-4xl mx-auto px-4 md:px-12">
+      <div className="relative mt-10 max-w-4xl mx-auto px-1 sm:px-4 md:px-12">
         <button
-          className="absolute -left-2 md:-left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
+          className="absolute -left-1 sm:-left-2 md:-left-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
           style={{ backgroundColor: "#0F0F2E" }}
           aria-label="Previous game"
         >
-          <ChevronLeft className="text-white w-6 h-6" />
+          <ChevronLeft className="text-white w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         <img
@@ -28,11 +28,11 @@ function GamesSection() {
         />
 
         <button
-          className="absolute -right-2 md:-right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
+          className="absolute -right-1 sm:-right-2 md:-right-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
           style={{ backgroundColor: "#0F0F2E" }}
           aria-label="Next game"
         >
-          <ChevronRight className="text-white w-6 h-6" />
+          <ChevronRight className="text-white w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 

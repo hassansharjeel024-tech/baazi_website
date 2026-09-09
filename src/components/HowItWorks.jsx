@@ -37,33 +37,37 @@ function HowItWorks() {
       </p>
 
       <div
-        className="flex flex-wrap justify-center gap-5 mt-10 mx-auto"
+        className="flex flex-col md:flex-row flex-wrap justify-center gap-4 md:gap-5 mt-10 mx-auto"
         style={{ maxWidth: "1300px" }}
       >
         {steps.map(({ number, icon, title, description }) => (
           <div
             key={number}
-            className="flex flex-col items-center text-center"
+            className="flex flex-row md:flex-col items-center md:items-center text-left md:text-center w-full md:w-[390px] md:h-[349px]"
             style={{
-              width: "390px",
-              height: "349px",
               backgroundColor: "#1C0E2B",
               borderRadius: "24px",
               borderTop: "0.8px solid rgba(196, 223, 0, 0.125)",
-              padding: "32px",
-              gap: "7px",
+              padding: "16px",
+              gap: "16px",
             }}
           >
             <img
               src={icon}
               alt={title}
-              className="w-20 h-24 object-contain"
+              className="w-12 h-14 md:w-20 md:h-24 object-contain shrink-0"
             />
-            <span className="text-yellow-400 font-extrabold text-xl">
-              {number}
-            </span>
-            <h3 className="text-white font-bold text-base">{title}</h3>
-            <p className="text-gray-400 text-sm">{description}</p>
+            <div className="flex flex-col md:items-center md:gap-[7px]">
+              <span className="text-yellow-400 font-extrabold text-sm md:text-xl">
+                {number}
+              </span>
+              <h3 className="text-white font-bold text-sm md:text-base">
+                {title}
+              </h3>
+              <p className="text-gray-400 text-xs md:text-sm mt-1 md:mt-0">
+                {description}
+              </p>
+            </div>
           </div>
         ))}
       </div>

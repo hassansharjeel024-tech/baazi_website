@@ -63,29 +63,27 @@ function Features() {
       </p>
 
       <div
-        className="flex flex-wrap justify-center gap-5 mt-10 mx-auto"
+        className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 mt-10 mx-auto"
         style={{ maxWidth: "1200px" }}
       >
         {features.map(({ icon: Icon, title, description, color, glow }) => (
           <div
             key={title}
-            className="flex flex-col text-left hover:-translate-y-1 transition-transform"
+            className="flex flex-col text-left hover:-translate-y-1 transition-transform w-[calc(50%-6px)] sm:w-[calc(50%-8px)] md:w-[371px] min-h-[180px] sm:min-h-[220px] md:h-[258px]"
             style={{
-              width: "371px",
-              height: "258px",
               backgroundColor: "#1C0E2B",
               backgroundImage: `radial-gradient(circle at top right, rgba(${glow}, 0.25) 0%, rgba(${glow}, 0) 60%)`,
               borderRadius: "24px",
               borderTop: "0.8px solid rgba(255, 107, 53, 0.19)",
-              padding: "24px",
-              gap: "15px",
+              padding: "16px",
+              gap: "10px",
             }}
           >
-            <div className={`${color} w-10 h-10 rounded-lg flex items-center justify-center`}>
-              <Icon className="text-white w-5 h-5" />
+            <div className={`${color} w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center`}>
+              <Icon className="text-white w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="text-white font-bold text-base">{title}</h3>
-            <p className="text-gray-400 text-sm">{description}</p>
+            <h3 className="text-white font-bold text-sm sm:text-base">{title}</h3>
+            <p className="text-gray-400 text-xs sm:text-sm">{description}</p>
           </div>
         ))}
       </div>

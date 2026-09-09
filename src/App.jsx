@@ -20,25 +20,27 @@ function App() {
     <div>
       <Navbar activeView={activeView} onNavigate={setActiveView} />
 
-      {activeView === "home" && (
-        <>
-          <Hero />
-          <Features />
-          <GamesSection />
-          <HowItWorks />
-          <RewardsShowcase />
-          <Referral />
-          <Leaderboard />
-          <Testimonials />
-          <FAQ />
-        </>
-      )}
+      <div className="pt-[88px]">
+        {activeView === "home" && (
+          <>
+            <Hero />
+            <Features />
+            <GamesSection />
+            <HowItWorks />
+            <RewardsShowcase />
+            <Referral />
+            <Leaderboard />
+            <Testimonials />
+            <FAQ />
+          </>
+        )}
 
-      {activeView === "leaderboard" && <GlobalRankings />}
+        {activeView === "leaderboard" && <GlobalRankings />}
 
-      {activeView === "coins" && <CoinShop />}
+        {activeView === "coins" && <CoinShop />}
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -53,7 +53,7 @@ function Leaderboard() {
         <img
           src={leadershipImage}
           alt="Leaderboard app screenshot"
-          className="w-full max-w-sm mx-auto h-auto 2xl:w-154.5 2xl:h-176.5 2xl:max-w-none"
+          className="hidden md:block w-full max-w-sm mx-auto h-auto 2xl:w-154.5 2xl:h-176.5 2xl:max-w-none"
         />
       </div>
     </section>

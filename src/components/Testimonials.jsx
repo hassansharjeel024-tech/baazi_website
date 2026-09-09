@@ -54,17 +54,17 @@ function Testimonials() {
       <div className="mt-10 flex items-center justify-center gap-6 max-w-275 mx-auto">
         <button
           onClick={prev}
-          className="bg-yellow-400 rounded-full p-2 shadow hover:bg-yellow-300 shrink-0"
+          className="hidden md:flex bg-yellow-400 rounded-full p-2 shadow hover:bg-yellow-300 shrink-0"
         >
           <ChevronLeft className="text-purple-900" />
         </button>
 
         <div
-          className="rounded-2xl p-8 shadow-md flex-1 max-w-250 md:min-h-104.25 border flex flex-col md:flex-row items-center gap-6 text-left"
+          className="rounded-2xl p-6 md:p-8 shadow-md flex-1 max-w-250 md:min-h-104.25 border flex flex-col md:flex-row items-center gap-6 text-left"
           style={{ backgroundColor: "#160B2E", borderColor: "#D9D9D9" }}
         >
           <div className="flex-1">
-            <div className="flex gap-1 mb-3">
+            <div className="flex gap-1 mb-3 justify-center md:justify-start">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
@@ -72,30 +72,47 @@ function Testimonials() {
                 />
               ))}
             </div>
-            {testimonial.quotes.map((quote, i) => (
-              <p key={i} className="text-white text-base leading-relaxed mb-3">
-                "{quote}"
-              </p>
-            ))}
-            <p className="font-bold text-sm text-white mt-2">
+            <p className="text-white text-sm md:text-base leading-relaxed mb-3 text-center md:text-left">
+              "{testimonial.quotes[0]}"
+            </p>
+            <p className="hidden md:block text-white text-base leading-relaxed mb-3">
+              "{testimonial.quotes[1]}"
+            </p>
+            <p className="font-bold text-sm text-white mt-2 text-center md:text-left">
               {testimonial.name}
             </p>
-            <p className="text-xs text-gray-400">{testimonial.role}</p>
+            <p className="text-xs text-gray-400 text-center md:text-left">
+              {testimonial.role}
+            </p>
           </div>
 
           <img
             src={testimonial.photo}
             alt={testimonial.name}
-            className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover shrink-0"
+            className="hidden md:block w-40 h-40 md:w-48 md:h-48 rounded-full object-cover shrink-0"
           />
         </div>
 
         <button
           onClick={next}
-          className="bg-yellow-400 rounded-full p-2 shadow hover:bg-yellow-300 shrink-0"
+          className="hidden md:flex bg-yellow-400 rounded-full p-2 shadow hover:bg-yellow-300 shrink-0"
         >
           <ChevronRight className="text-purple-900" />
         </button>
+      </div>
+
+      {/* Mobile carousel dots */}
+      <div className="flex md:hidden items-center justify-center gap-2 mt-6">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            aria-label={`Go to testimonial ${i + 1}`}
+            className={`h-2 rounded-full transition-all ${
+              i === index ? "w-6 bg-yellow-400" : "w-2 bg-gray-300"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

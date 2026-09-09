@@ -24,6 +24,16 @@ function Hero() {
         you'll unlock — get ready for non-stop fun and big wins.
       </p>
 
+      <button
+        className="mt-8 px-10 py-4 rounded-full text-[#4C1D95] font-bold text-sm md:text-base uppercase tracking-wide hover:brightness-95 transition"
+        style={{
+          backgroundColor: "#DBE21C",
+          fontFamily: "'Outfit', sans-serif",
+        }}
+      >
+        Download Now
+      </button>
+
       <img
         src={heroImage}
         alt="Play games and win rewards"

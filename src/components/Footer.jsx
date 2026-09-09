@@ -43,14 +43,14 @@ const socialIcons = [TwitterIcon, InstagramIcon, YoutubeIcon, FacebookIcon];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#08051A] pt-16 pb-6 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-10">
-        <div className="col-span-2 md:col-span-2">
-          <img src={logoImage} alt="Baazi logo" className="h-10 w-auto mb-4" />
+    <footer className="bg-[#08051A] pt-12 md:pt-16 pb-6 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-8 md:gap-10">
+        <div className="col-span-2">
+          <img src={logoImage} alt="Baazi logo" className="h-9 md:h-10 w-auto mb-4" />
           <p className="font-poppins text-gray-400 text-sm leading-relaxed mb-6">
             The ultimate play-to-earn gaming universe. Play games, complete daily tasks, and redeem real rewards. Free forever.
           </p>
-          <div className="flex gap-3">
+          <div className="hidden md:flex gap-3">
             {socialIcons.map((Icon, index) => <a key={index} href="#" className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center hover:opacity-80 transition"><Icon className="w-4 h-4 text-[#160B2E]" /></a>)}
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function Footer() {
           </ul>
         </div>)}
 
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-1">
           <h4 className="font-poppins font-bold text-white text-xs uppercase tracking-wide mb-4">Download App</h4>
           <a href="#" className="w-fit block">
             <img src={playIcon} alt="Get it on Google Play and App Store" className="w-auto max-w-50" />
@@ -70,9 +70,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto border-t border-gray-700 mt-12 pt-6 flex flex-col sm:flex-row items-center sm:justify-between gap-2 text-center sm:text-left">
+      <div className="max-w-7xl mx-auto border-t border-gray-700 mt-10 md:mt-12 pt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-2 text-left">
         <p className="font-poppins text-gray-500 text-xs">© 2026 baaziplay.com · All rights reserved.</p>
-        <p className="font-poppins text-gray-500 text-xs">Made with 🥕 for gamers everywhere</p>
+        <p className="hidden sm:block font-poppins text-gray-500 text-xs">Made with 🥕 for gamers everywhere</p>
+        <div className="flex md:hidden gap-3">
+          {socialIcons.map((Icon, index) => <a key={index} href="#" className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center hover:opacity-80 transition"><Icon className="w-4 h-4 text-[#160B2E]" /></a>)}
+        </div>
       </div>
     </footer>
   );
