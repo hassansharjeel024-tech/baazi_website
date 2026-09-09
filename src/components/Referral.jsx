@@ -45,7 +45,7 @@ function Referral() {
         {steps.map(({ emoji, title, description }) => (
           <div
             key={title}
-            className="flex flex-row md:flex-col items-center text-left md:text-center w-full md:w-[390px] md:h-[232px]"
+            className="flex flex-row md:flex-col items-center text-left md:text-center w-full md:w-97.5 md:h-58"
             style={{
               backgroundColor: "#1C0E2B",
               borderRadius: "24px",

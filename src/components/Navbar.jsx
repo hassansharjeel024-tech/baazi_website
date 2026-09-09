@@ -89,7 +89,7 @@ function Navbar({ activeView, onNavigate }) {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 w-full z-50 h-[88px] px-6 flex items-center justify-between"
+        className="fixed top-0 left-0 w-full z-50 h-22 px-6 flex items-center justify-between"
         style={{
           background: "linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)",
         }}
@@ -145,7 +145,7 @@ function Navbar({ activeView, onNavigate }) {
       {/* Mobile dropdown menu */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed top-[88px] left-0 w-full z-40 flex flex-col px-6 py-6 gap-5"
+          className="lg:hidden fixed top-22 left-0 w-full z-40 flex flex-col px-6 py-6 gap-5"
           style={{
             background: "linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)",
           }}

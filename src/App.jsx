@@ -20,7 +20,7 @@ function App() {
     <div>
       <Navbar activeView={activeView} onNavigate={setActiveView} />
 
-      <div className="pt-[88px]">
+      <div className="pt-22">
         {activeView === "home" && (
           <>
             <Hero />

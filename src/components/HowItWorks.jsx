@@ -43,7 +43,7 @@ function HowItWorks() {
         {steps.map(({ number, icon, title, description }) => (
           <div
             key={number}
-            className="flex flex-row md:flex-col items-center md:items-center text-left md:text-center w-full md:w-[390px] md:h-[349px]"
+            className="flex flex-row md:flex-col items-center md:items-center text-left md:text-center w-full md:w-97.5 md:h-87.25"
             style={{
               backgroundColor: "#1C0E2B",
               borderRadius: "24px",
@@ -57,7 +57,7 @@ function HowItWorks() {
               alt={title}
               className="w-12 h-14 md:w-20 md:h-24 object-contain shrink-0"
             />
-            <div className="flex flex-col md:items-center md:gap-[7px]">
+            <div className="flex flex-col md:items-center md:gap-1.75">
               <span className="text-yellow-400 font-extrabold text-sm md:text-xl">
                 {number}
               </span>

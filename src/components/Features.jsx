@@ -69,7 +69,7 @@ function Features() {
         {features.map(({ icon: Icon, title, description, color, glow }) => (
           <div
             key={title}
-            className="flex flex-col text-left hover:-translate-y-1 transition-transform w-[calc(50%-6px)] sm:w-[calc(50%-8px)] md:w-[371px] min-h-[180px] sm:min-h-[220px] md:h-[258px]"
+            className="flex flex-col text-left hover:-translate-y-1 transition-transform w-[calc(50%-6px)] sm:w-[calc(50%-8px)] md:w-92.75 min-h-45 sm:min-h-55 md:h-64.5"
             style={{
               backgroundColor: "#1C0E2B",
               backgroundImage: `radial-gradient(circle at top right, rgba(${glow}, 0.25) 0%, rgba(${glow}, 0) 60%)`,
