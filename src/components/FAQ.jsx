@@ -4,27 +4,27 @@ import mascotImage from "../assets/mascot-rabbit.png";
 
 const faqData = [
   {
-    question: "IS BAZI FREE TO DOWNLOAD?",
+    question: "Is Baazi free to download?",
     answer:
       "Yes! Baazi is completely free to download and play. You can start earning rewards right away without spending a single rupee.",
   },
   {
-    question: "CAN I REDEEM BAAZI COINS FOR CASH?",
+    question: "Can I redeem Baazi coins for cash?",
     answer:
-      "No, Baazi coins can only be used for in-app purchases and rewards.No, Baazi coins can only be used for in-app purchases and rewards.No, Baazi coins can only be used for in-app purchases and rewards.No, Baazi coins can only be used for in-app purchases and rewards.No, Baazi coins can only be used for in-app purchases and rewards",
+      "No, Baazi coins can only be used for in-app purchases and rewards.",
   },
   {
-    question: "WHAT ARE MYSTERY BOXES?",
+    question: "What are Mystery Boxes?",
     answer:
       "Mystery Boxes are surprise rewards you can unlock by playing games and completing daily tasks. Each box can contain coins, vouchers, or exclusive in-app items.",
   },
   {
-    question: "HOW TO REDEEM CARROT CREDITS?",
+    question: "How to redeem Carrot credits?",
     answer:
       "Head over to the Rewards section in the app, select Carrot Credits, and choose from the available vouchers or cash rewards to redeem.",
   },
   {
-    question: "WHAT ARE BAAZI COINS?",
+    question: "What are Baazi coins?",
     answer:
       "Baazi Coins are the in-app currency you earn by playing games, completing tasks, and referring friends. Use them to unlock mystery boxes and other in-app perks.",
   },
@@ -67,7 +67,7 @@ export default function FAQ() {
                     onClick={() => toggleIndex(index)}
                     className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
                   >
-                    <span className="font-poppins font-bold text-white uppercase text-xs md:text-sm tracking-wide">
+                    <span className="font-poppins font-bold text-white text-xs md:text-sm tracking-wide">
                       {item.question}
                     </span>
                     <span className="shrink-0 w-6 h-6 rounded-lg bg-white flex items-center justify-center">
