@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import testimonialPhoto from "../assets/testimonial-photo.png";
 
@@ -36,10 +36,37 @@ function Testimonials() {
   const [index, setIndex] = useState(0);
   const testimonial = testimonials[index];
 
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
   const prev = () =>
     setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1));
   const next = () =>
     setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1));
+
+  const handleTouchStart = (e) => {
+    touchEndX.current = null;
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (distance > minSwipeDistance) {
+      next();
+    } else if (distance < -minSwipeDistance) {
+      prev();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   return (
     <section id="testimonials" className="bg-purple-50 px-6 py-16 text-center">
@@ -60,6 +87,9 @@ function Testimonials() {
         </button>
 
         <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           className="rounded-2xl p-6 md:p-8 shadow-md flex-1 max-w-250 md:min-h-104.25 border flex flex-col md:flex-row items-center gap-6 text-left"
           style={{ backgroundColor: "#160B2E", borderColor: "#D9D9D9" }}
         >
