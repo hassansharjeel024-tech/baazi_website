@@ -37,9 +37,9 @@ export default function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-    return (
+  return (
     <section id="faqs" className="bg-[#DBE21C] py-20 px-6 md:px-12 2xl:min-h-261 2xl:flex 2xl:flex-col 2xl:justify-center">
-         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Left: Heading + Accordion */}
         <div className="w-full lg:w-1/2 min-w-0 2xl:w-166.5 2xl:max-w-166.5">
           <h2
@@ -56,7 +56,12 @@ export default function FAQ() {
               return (
                 <div
                   key={index}
-                  className="bg-[#5B21B6] rounded-2xl overflow-hidden transition-all duration-300"
+                  className="overflow-hidden transition-all duration-300"
+                  style={{
+                    backgroundColor: "#570C92",
+                    borderRadius: "20px",
+                    border: "1px solid #000000",
+                  }}
                 >
                   <button
                     onClick={() => toggleIndex(index)}
@@ -67,9 +72,9 @@ export default function FAQ() {
                     </span>
                     <span className="shrink-0 w-6 h-6 rounded-lg bg-white flex items-center justify-center">
                       {isOpen ? (
-                        <Minus className="w-3.5 h-3.5 text-[#5B21B6]" />
+                        <Minus className="w-3.5 h-3.5" style={{ color: "#570C92" }} />
                       ) : (
-                        <Plus className="w-3.5 h-3.5 text-[#5B21B6]" />
+                        <Plus className="w-3.5 h-3.5" style={{ color: "#570C92" }} />
                       )}
                     </span>
                   </button>

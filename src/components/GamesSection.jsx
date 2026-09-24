@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import gamesImage from "../assets/games-image.png";
 
 function GamesSection() {
@@ -8,37 +8,66 @@ function GamesSection() {
       className="px-3 sm:px-6 py-16 text-center overflow-hidden relative"
       style={{ backgroundColor: "#DBE21C" }}
     >
-      <h2 className="section-heading text-2xl md:text-3xl text-gray-900">
+      <h2
+        className="uppercase text-gray-900"
+        style={{
+          fontFamily: "'Exo 2', sans-serif",
+          fontWeight: 700,
+          fontSize: "clamp(24px, 4vw, 48px)",
+          lineHeight: "1.2",
+          letterSpacing: "0px",
+        }}
+      >
         PLAY 100+ GAMES & EARN EVERY SESSION
       </h2>
 
-      <div className="relative mt-10 max-w-4xl mx-auto px-1 sm:px-4 md:px-12">
+      <div className="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 mt-10 max-w-6xl mx-auto px-2">
         <button
-          className="absolute -left-1 sm:-left-2 md:-left-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
-          style={{ backgroundColor: "#0F0F2E" }}
+          className="shrink-0 flex items-center justify-center hover:opacity-90 transition-opacity"
+          style={{
+            width: "40px",
+            height: "60px",
+            backgroundColor: "#091E46",
+            border: "2px solid #D0D0D0",
+            borderRadius: "0px",
+          }}
           aria-label="Previous game"
         >
-          <ChevronLeft className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+          <ArrowLeft className="w-4 h-4" style={{ color: "#D7E4ED" }} />
         </button>
 
         <img
-          src={gamesImage}
-          alt="Play 100+ games"
-          className="w-full h-auto"
-        />
+  src={gamesImage}
+  alt="Play 100+ games"
+  className="w-full h-auto"
+  style={{ maxWidth: "900px" }}
+/>
 
         <button
-          className="absolute -right-1 sm:-right-2 md:-right-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity"
-          style={{ backgroundColor: "#0F0F2E" }}
+          className="shrink-0 flex items-center justify-center hover:opacity-90 transition-opacity"
+          style={{
+            width: "40px",
+            height: "60px",
+            backgroundColor: "#091E46",
+            border: "2px solid #D0D0D0",
+            borderRadius: "0px",
+          }}
           aria-label="Next game"
         >
-          <ChevronRight className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+          <ArrowRight className="w-4 h-4" style={{ color: "#D7E4ED" }} />
         </button>
       </div>
 
       <button
-        className="mt-10 text-white font-bold px-8 py-3 rounded-full transition-colors hover:opacity-90"
-        style={{ backgroundColor: "#0F0F2E" }}
+        className="mt-10 text-white transition-colors hover:opacity-90"
+        style={{
+          width: "240px",
+          height: "68px",
+          borderRadius: "112px",
+          backgroundColor: "#091E46",
+          border: "2px solid #091E46",
+          fontWeight: 700,
+        }}
       >
         ALL GAMES
       </button>

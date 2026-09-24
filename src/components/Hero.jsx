@@ -5,10 +5,19 @@ function Hero() {
     <section
       id="home"
       className="px-6 pt-14 pb-0 flex flex-col items-center text-center overflow-visible relative"
-      style={{ background: "linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)" }}
+      style={{ backgroundColor: "#570C92" }}
     >
+      <div
+        className="absolute top-0 left-0 w-full pointer-events-none"
+        style={{
+          height: "140px",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%)",
+        }}
+      />
+
       <h1
-        className="text-4xl md:text-6xl 2xl:text-[102px]! 2xl:leading-30! font-extrabold uppercase text-[#DBE21C] leading-tight drop-shadow-[3px_3px_0px_rgba(0,0,0,0.4)]"
+        className="text-4xl md:text-6xl 2xl:text-[102px]! 2xl:leading-30! font-extrabold uppercase text-[#DBE21C] leading-tight drop-shadow-[3px_3px_0px_rgba(0,0,0,0.4)] relative z-10"
         style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 900 }}
       >
         PLAY GAMES.
@@ -17,7 +26,7 @@ function Hero() {
       </h1>
 
       <p
-        className="text-[#C8C8C8] mt-5 max-w-xl 2xl:max-w-189.75! text-sm md:text-base 2xl:text-[24px]! 2xl:leading-[32.8px]!"
+        className="text-[#C8C8C8] mt-5 max-w-xl 2xl:max-w-189.75! text-sm md:text-base 2xl:text-[24px]! 2xl:leading-[32.8px]! relative z-10"
         style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400 }}
       >
         Play exciting games and win cash! The more you play, the more rewards
@@ -25,7 +34,7 @@ function Hero() {
       </p>
 
       <button
-        className="mt-8 px-10 py-4 rounded-full text-[#4C1D95] font-bold text-sm md:text-base uppercase tracking-wide hover:brightness-95 transition"
+        className="mt-8 px-10 py-4 rounded-full text-[#4C1D95] font-bold text-sm md:text-base uppercase tracking-wide hover:brightness-95 transition relative z-10 md:hidden"
         style={{
           backgroundColor: "#DBE21C",
           fontFamily: "'Outfit', sans-serif",
@@ -37,7 +46,7 @@ function Hero() {
       <img
         src={heroImage}
         alt="Play games and win rewards"
-        className="mt-8 w-full max-w-2xl 2xl:max-w-267.5! h-auto -mb-16 relative z-10"
+        className="mt-8 w-full max-w-2xl 2xl:max-w-267.5! h-auto 2xl:mb-[-131px]! relative z-10"
       />
     </section>
   );
