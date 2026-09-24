@@ -46,7 +46,7 @@ function Hero() {
       <img
         src={heroImage}
         alt="Play games and win rewards"
-        className="mt-8 w-full max-w-2xl 2xl:max-w-267.5! h-auto 2xl:mb-[-131px]! relative z-10"
+        className="mt-8 w-full max-w-2xl 2xl:max-w-267.5! h-auto -mb-16 md:mb-0 2xl:mb-[-131px]! relative z-10"
       />
     </section>
   );
