@@ -35,27 +35,42 @@ function LoginScreen() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="min-h-screen flex items-center justify-center px-6"
+      className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
       style={{
         backgroundColor: "#0F111A",
-        backgroundImage:
-          "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(180deg, #0F111A 0%, #3B82F6 100%)",
-        backgroundSize: "24px 24px, 100% 100%",
+        backgroundImage: "linear-gradient(180deg, #0F111A 0%, #3B82F6 100%)",
       }}
     >
+      {/* Dot texture overlay — CSS-generated, fades out vertically like the Figma asset */}
+    {/* Dot texture overlay */}
       <div
-        className="w-full flex flex-col gap-8"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          maxWidth: "440px",
-          borderRadius: "12px",
-          border: "1px solid rgba(255,255,255,0.08)",
-          backgroundColor: "rgba(59,130,246,0.13)",
-          paddingTop: "52px",
-          paddingRight: "32px",
-          paddingBottom: "32px",
-          paddingLeft: "32px",
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px)",
+          backgroundSize: "27px 27px",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 10%, transparent 55%)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 10%, transparent 55%)",
         }}
-      >
+      />
+
+      <div
+  className="w-full flex flex-col gap-8 relative z-10"
+  style={{
+    maxWidth: "440px",
+    borderRadius: "12px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    backgroundColor: "rgba(59,130,246,0.13)",
+    backdropFilter: "blur(24px)",
+    WebkitBackdropFilter: "blur(24px)",
+    paddingTop: "52px",
+    paddingRight: "32px",
+    paddingBottom: "32px",
+    paddingLeft: "32px",
+  }}
+>
         <div>
           <h1 className="text-white font-bold text-2xl mb-1">Welcome Back</h1>
           <p className="text-gray-400 text-sm">
