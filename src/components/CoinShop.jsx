@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogIn } from "lucide-react";
 import heroBg from "../assets/hero-bg.png";
 import coinStack from "../assets/coin-stack.png";
 import LoginModal from "./LoginModal";
@@ -94,8 +94,9 @@ function CoinCountLabel({ total }) {
 
 function CoinShop({ checkoutReturn = null }) {
   const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => isAuthenticated());
   const [error, setError] = useState("");
+  const [needsAuth, setNeedsAuth] = useState(() => !isAuthenticated());
   const [checkoutError, setCheckoutError] = useState("");
   const [buyingId, setBuyingId] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -121,17 +122,28 @@ function CoinShop({ checkoutReturn = null }) {
       setPackages(DESIGN_PREVIEW_PACKS);
       setLoading(false);
       setError("");
+      setNeedsAuth(false);
+      return;
+    }
+
+    if (!isAuthenticated()) {
+      setPackages([]);
+      setLoading(false);
+      setError("");
+      setNeedsAuth(true);
       return;
     }
 
     setLoading(true);
     setError("");
+    setNeedsAuth(false);
     try {
       const rows = await listCoinPackages();
       setPackages(rows);
     } catch (err) {
       if (err?.status === 401) {
-        setError("Sign in to view and purchase coin packs.");
+        setNeedsAuth(true);
+        setError("");
       } else {
         setError(err?.message || "Could not load coin packages.");
       }
@@ -356,44 +368,74 @@ function CoinShop({ checkoutReturn = null }) {
           </div>
         )}
 
-        {!loading && error && (
+        {!loading && needsAuth && (
+          <div
+            className="mx-auto flex max-w-md flex-col items-center py-14 text-center"
+            style={{
+              borderRadius: 16,
+              border: "1px dashed #D4C8EC",
+              backgroundColor: "#FAF8FD",
+              paddingLeft: 28,
+              paddingRight: 28,
+            }}
+          >
+            <img
+              src={coinStack}
+              alt=""
+              className="mb-5 object-contain opacity-90"
+              style={{ width: 72, height: 64 }}
+            />
+            <p
+              className="mb-2 text-lg font-bold"
+              style={{
+                fontFamily: "'Exo 2', sans-serif",
+                color: CARD_TITLE,
+              }}
+            >
+              Sign in to unlock coin packs
+            </p>
+            <p
+              className="mb-6 max-w-xs text-sm"
+              style={{ color: COIN_LABEL, lineHeight: 1.5 }}
+            >
+              Log in to browse packages, buy coins, and track your payment
+              history.
+            </p>
+            <button
+              type="button"
+              onClick={() => setIsLoginOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold transition hover:brightness-95"
+              style={{ backgroundColor: LIME, color: "#1A1028" }}
+            >
+              <LogIn className="h-4 w-4" />
+              Log In
+            </button>
+          </div>
+        )}
+
+        {!loading && !needsAuth && error && (
           <div className="mx-auto max-w-md py-12 text-center">
             <p className="mb-4 text-sm" style={{ color: CARD_TITLE }}>
               {error}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {/sign in/i.test(error) && (
-                <button
-                  type="button"
-                  onClick={() => setIsLoginOpen(true)}
-                  className="rounded-full px-5 py-2.5 text-sm font-bold"
-                  style={{ backgroundColor: LIME, color: "#1A1028" }}
-                >
-                  Log In
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={loadPackages}
-                className="rounded-full px-5 py-2.5 text-sm font-bold"
-                style={{
-                  backgroundColor: /sign in/i.test(error) ? "#EDE6FA" : LIME,
-                  color: "#1A1028",
-                }}
-              >
-                Try Again
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={loadPackages}
+              className="rounded-full px-5 py-2.5 text-sm font-bold"
+              style={{ backgroundColor: LIME, color: "#1A1028" }}
+            >
+              Try Again
+            </button>
           </div>
         )}
 
-        {!loading && !error && packages.length === 0 && (
+        {!loading && !needsAuth && !error && packages.length === 0 && (
           <p className="py-12 text-center text-sm text-gray-500">
             No coin packages are available right now.
           </p>
         )}
 
-        {!loading && !error && packages.length > 0 && (
+        {!loading && !needsAuth && !error && packages.length > 0 && (
           <div
             className="mx-auto grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4"
             style={{ maxWidth: 1120 }}
