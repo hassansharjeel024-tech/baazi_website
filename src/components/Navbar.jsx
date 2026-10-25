@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Plus } from "lucide-react";
 import logo from "../assets/logo.png";
 import LoginModal from "./LoginModal";
@@ -7,8 +7,12 @@ import { getCurrentUser, isAuthenticated, logout } from "../services/authService
 // #570C92 par 20% black = #460A75. Isay halka/gehra karna ho to sirf yeh ek value badlein.
 const NAVBAR_BG = "#460A75";
 
-// 2xl par gaps Figma ke ratio mein baantne ke liye (1920px design ke px values)
-const grow = (value) => ({ flex: `${value} 1 0%` });
+const authButtonStyle = {
+  backgroundColor: "#DBE21C",
+  color: "#141414",
+  fontFamily: "'Exo 2', sans-serif",
+  fontWeight: 700,
+};
 
 function Navbar({ activeView, onNavigate }) {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -72,8 +76,8 @@ function Navbar({ activeView, onNavigate }) {
     return () => observer.disconnect();
   }, [activeView]);
 
-  // 2xl (1536px+) par navbar 140px hai, us se chhoti screens par 88px
-  const getNavbarHeight = () => (window.innerWidth >= 1536 ? 140 : 88);
+  // lg (1024px+) par navbar 72px hai, us se chhoti screens par 64px — App.jsx ka pt bhi yahi hai
+  const getNavbarHeight = () => (window.innerWidth >= 1024 ? 72 : 64);
 
   const handleNavClick = (key) => {
     setIsMobileMenuOpen(false);
@@ -112,35 +116,30 @@ function Navbar({ activeView, onNavigate }) {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 w-full z-50 h-22 px-6 flex items-center justify-between 2xl:h-35 2xl:pt-4 2xl:px-0 2xl:justify-start"
+        className="fixed top-0 left-0 w-full z-50 shadow-[0_2px_12px_rgba(0,0,0,0.18)]"
         style={{ backgroundColor: NAVBAR_BG }}
       >
-        {/* 2xl: left padding (Figma 139px) */}
-        <span aria-hidden="true" className="hidden 2xl:block" style={grow(139)} />
+        <div className="mx-auto flex h-16 max-w-360 items-center justify-between px-5 sm:px-6 lg:h-18 lg:px-8 2xl:px-10">
+          <img
+            src={logo}
+            alt="Baazi"
+            className="h-8 w-auto shrink-0 cursor-pointer lg:h-9 2xl:h-10"
+            style={{ filter: "drop-shadow(0 0 4px rgba(170, 113, 222, 0.6))" }}
+            onClick={() => {
+              onNavigate("home");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMobileMenuOpen(false);
+            }}
+          />
 
-        <img
-          src={logo}
-          alt="Baazi"
-          className="h-10 w-auto shrink-0 cursor-pointer 2xl:w-45.75 2xl:h-23"
-          style={{ filter: "drop-shadow(0 0 4px rgba(170, 113, 222, 0.6))" }}
-          onClick={() => {
-            onNavigate("home");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setIsMobileMenuOpen(false);
-          }}
-        />
-
-        {/* 2xl: logo aur links ke beech gap (Figma 173px) */}
-        <span aria-hidden="true" className="hidden 2xl:block" style={grow(173)} />
-
-        {/* Desktop links (2xl par ul "contents" hai, taake li seedha nav ke flex items banein) */}
-        <ul
-          className="hidden lg:flex items-center gap-6 text-white text-xs uppercase tracking-wide 2xl:contents 2xl:text-[16px] 2xl:leading-5 2xl:tracking-normal"
-          style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 700 }}
-        >
-          {navLinks.map((link, index) => (
-            <Fragment key={link.key}>
+          {/* Desktop links */}
+          <ul
+            className="hidden lg:flex items-center gap-5 text-white text-xs uppercase tracking-wide xl:gap-7 xl:text-[13px] 2xl:gap-8 2xl:text-sm"
+            style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 700 }}
+          >
+            {navLinks.map((link) => (
               <li
+                key={link.key}
                 onClick={() => handleNavClick(link.key)}
                 className={`shrink-0 whitespace-nowrap cursor-pointer hover:text-yellow-300 transition-colors ${
                   isActive(link.key) ? "text-yellow-300" : ""
@@ -148,84 +147,62 @@ function Navbar({ activeView, onNavigate }) {
               >
                 {link.label}
               </li>
-              {index < navLinks.length - 1 && (
-                // 2xl: links ke beech gap (Figma 38px)
-                <li
-                  aria-hidden="true"
-                  role="presentation"
-                  className="hidden 2xl:block"
-                  style={grow(38)}
-                />
-              )}
-            </Fragment>
-          ))}
-        </ul>
+            ))}
+          </ul>
 
-        {/* 2xl: links aur login ke beech gap (Figma 155px) */}
-        <span aria-hidden="true" className="hidden 2xl:block" style={grow(155)} />
-
-        {/* Desktop login / logout */}
-        {user ? (
-          <button
-            type="button"
-            onClick={handleLogout}
-            title={user?.username || user?.email || "Log out"}
-            className="hidden lg:flex shrink-0 items-center justify-center gap-[9px] px-5 py-2 rounded-full transition-colors 2xl:w-[180.45px] 2xl:h-[62.2px] 2xl:text-[18px] 2xl:leading-[19.2px]"
-            style={{
-              backgroundColor: "#DBE21C",
-              color: "#141414",
-              fontFamily: "'Exo 2', sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            LOGOUT
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setIsLoginOpen(true)}
-            className="hidden lg:flex shrink-0 items-center justify-center gap-[9px] px-5 py-2 rounded-full transition-colors 2xl:w-[180.45px] 2xl:h-[62.2px] 2xl:text-[18px] 2xl:leading-[19.2px]"
-            style={{
-              backgroundColor: "#DBE21C",
-              color: "#141414",
-              fontFamily: "'Exo 2', sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            <Plus size={14} color="#141414" />
-            LOGIN
-          </button>
-        )}
-
-        {/* 2xl: right padding (Figma 159px) */}
-        <span aria-hidden="true" className="hidden 2xl:block" style={grow(159)} />
-
-        {/* Mobile hamburger icon */}
-        <button
-          className="lg:hidden text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? (
-            <X className="w-7 h-7" />
+          {/* Desktop login / logout */}
+          {user ? (
+            <button
+              type="button"
+              onClick={handleLogout}
+              title={user?.username || user?.email || "Log out"}
+              className="hidden lg:flex h-9 shrink-0 items-center justify-center gap-1.5 px-5 rounded-full text-[13px] transition hover:brightness-95 2xl:h-10 2xl:px-6 2xl:text-sm"
+              style={authButtonStyle}
+            >
+              LOGOUT
+            </button>
           ) : (
-            <Menu className="w-7 h-7" />
+            <button
+              type="button"
+              onClick={() => setIsLoginOpen(true)}
+              className="hidden lg:flex h-9 shrink-0 items-center justify-center gap-1.5 px-5 rounded-full text-[13px] transition hover:brightness-95 2xl:h-10 2xl:px-6 2xl:text-sm"
+              style={authButtonStyle}
+            >
+              <Plus size={14} color="#141414" />
+              LOGIN
+            </button>
           )}
-        </button>
+
+          {/* Mobile hamburger icon */}
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            className="lg:hidden -mr-1 p-1 text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile dropdown menu */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed top-22 left-0 w-full z-40 flex flex-col px-6 py-6 gap-5"
+          className="lg:hidden fixed top-16 left-0 w-full z-40 flex flex-col px-5 pt-2 pb-5 gap-1 border-t border-white/10 shadow-[0_8px_16px_rgba(0,0,0,0.2)] sm:px-6"
           style={{ backgroundColor: NAVBAR_BG }}
         >
           {navLinks.map((link) => (
             <span
               key={link.key}
               onClick={() => handleNavClick(link.key)}
-              className={`cursor-pointer text-white text-sm font-bold uppercase tracking-wide ${
+              className={`cursor-pointer py-2 text-white text-sm font-bold uppercase tracking-wide ${
                 isActive(link.key) ? "text-yellow-300" : ""
               }`}
+              style={{ fontFamily: "'Exo 2', sans-serif" }}
             >
               {link.label}
             </span>
@@ -235,8 +212,8 @@ function Navbar({ activeView, onNavigate }) {
             <button
               type="button"
               onClick={handleLogout}
-              className="text-purple-900 font-bold px-5 py-3 rounded-full mt-2"
-              style={{ backgroundColor: "#DBE21C" }}
+              className="mt-3 h-11 rounded-full text-sm"
+              style={authButtonStyle}
             >
               LOGOUT
             </button>
@@ -247,10 +224,11 @@ function Navbar({ activeView, onNavigate }) {
                 setIsLoginOpen(true);
                 setIsMobileMenuOpen(false);
               }}
-              className="text-purple-900 font-bold px-5 py-3 rounded-full mt-2"
-              style={{ backgroundColor: "#DBE21C" }}
+              className="mt-3 flex h-11 items-center justify-center gap-1.5 rounded-full text-sm"
+              style={authButtonStyle}
             >
-              + LOGIN
+              <Plus size={14} color="#141414" />
+              LOGIN
             </button>
           )}
         </div>

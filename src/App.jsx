@@ -63,7 +63,7 @@ function App() {
     <div>
       <Navbar activeView={activeView} onNavigate={handleNavigate} />
 
-      <div className="pt-22">
+      <div className="pt-16 lg:pt-18">
         {activeView === "home" && (
           <>
             <Hero />
