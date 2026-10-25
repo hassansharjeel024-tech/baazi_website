@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import { Menu, X, Plus } from "lucide-react";
 import logo from "../assets/logo.png";
 import LoginModal from "./LoginModal";
+import { getCurrentUser, isAuthenticated, logout } from "../services/authService";
 
 // #570C92 par 20% black = #460A75. Isay halka/gehra karna ho to sirf yeh ek value badlein.
 const NAVBAR_BG = "#460A75";
@@ -13,6 +14,19 @@ function Navbar({ activeView, onNavigate }) {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("features");
+  const [user, setUser] = useState(() =>
+    isAuthenticated() ? getCurrentUser() : null
+  );
+
+  function handleAuthSuccess() {
+    setUser(getCurrentUser());
+  }
+
+  function handleLogout() {
+    logout();
+    setUser(null);
+    setIsMobileMenuOpen(false);
+  }
 
   const navLinks = [
     { label: "Features", key: "features" },
@@ -150,20 +164,38 @@ function Navbar({ activeView, onNavigate }) {
         {/* 2xl: links aur login ke beech gap (Figma 155px) */}
         <span aria-hidden="true" className="hidden 2xl:block" style={grow(155)} />
 
-        {/* Desktop login button */}
-        <button
-          onClick={() => setIsLoginOpen(true)}
-          className="hidden lg:flex shrink-0 items-center justify-center gap-[9px] px-5 py-2 rounded-full transition-colors 2xl:w-[180.45px] 2xl:h-[62.2px] 2xl:text-[18px] 2xl:leading-[19.2px]"
-          style={{
-            backgroundColor: "#DBE21C",
-            color: "#141414",
-            fontFamily: "'Exo 2', sans-serif",
-            fontWeight: 700,
-          }}
-        >
-          <Plus size={14} color="#141414" />
-          LOGIN
-        </button>
+        {/* Desktop login / logout */}
+        {user ? (
+          <button
+            type="button"
+            onClick={handleLogout}
+            title={user?.username || user?.email || "Log out"}
+            className="hidden lg:flex shrink-0 items-center justify-center gap-[9px] px-5 py-2 rounded-full transition-colors 2xl:w-[180.45px] 2xl:h-[62.2px] 2xl:text-[18px] 2xl:leading-[19.2px]"
+            style={{
+              backgroundColor: "#DBE21C",
+              color: "#141414",
+              fontFamily: "'Exo 2', sans-serif",
+              fontWeight: 700,
+            }}
+          >
+            LOGOUT
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsLoginOpen(true)}
+            className="hidden lg:flex shrink-0 items-center justify-center gap-[9px] px-5 py-2 rounded-full transition-colors 2xl:w-[180.45px] 2xl:h-[62.2px] 2xl:text-[18px] 2xl:leading-[19.2px]"
+            style={{
+              backgroundColor: "#DBE21C",
+              color: "#141414",
+              fontFamily: "'Exo 2', sans-serif",
+              fontWeight: 700,
+            }}
+          >
+            <Plus size={14} color="#141414" />
+            LOGIN
+          </button>
+        )}
 
         {/* 2xl: right padding (Figma 159px) */}
         <span aria-hidden="true" className="hidden 2xl:block" style={grow(159)} />
@@ -199,20 +231,36 @@ function Navbar({ activeView, onNavigate }) {
             </span>
           ))}
 
-          <button
-            onClick={() => {
-              setIsLoginOpen(true);
-              setIsMobileMenuOpen(false);
-            }}
-            className="text-purple-900 font-bold px-5 py-3 rounded-full mt-2"
-            style={{ backgroundColor: "#DBE21C" }}
-          >
-            + LOGIN
-          </button>
+          {user ? (
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="text-purple-900 font-bold px-5 py-3 rounded-full mt-2"
+              style={{ backgroundColor: "#DBE21C" }}
+            >
+              LOGOUT
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setIsLoginOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+              className="text-purple-900 font-bold px-5 py-3 rounded-full mt-2"
+              style={{ backgroundColor: "#DBE21C" }}
+            >
+              + LOGIN
+            </button>
+          )}
         </div>
       )}
 
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onSuccess={handleAuthSuccess}
+      />
     </>
   );
 }

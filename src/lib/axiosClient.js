@@ -1,4 +1,5 @@
 import axios from "axios";
+import { clearSession, getToken } from "../services/authStorage";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -8,8 +9,12 @@ const axiosClient = axios.create({
   },
 });
 
+// Ensure every request (GET/POST/PUT/PATCH/DELETE) carries platform: web
 axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("baazi_admin_token");
+  config.headers = config.headers ?? {};
+  config.headers.platform = "web";
+
+  const token = getToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -27,11 +32,7 @@ axiosClient.interceptors.response.use(
       "Something went wrong. Please try again.";
 
     if (status === 401) {
-      localStorage.removeItem("baazi_admin_token");
-      localStorage.removeItem("baazi_admin_user");
-      if (!window.location.pathname.includes("/admin/login")) {
-        window.location.href = "/admin/login";
-      }
+      clearSession();
     }
 
     return Promise.reject({ status, message, raw: error });

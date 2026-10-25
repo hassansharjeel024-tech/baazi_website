@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
@@ -13,22 +12,56 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import GlobalRankings from "./components/GlobalRankings";
 import CoinShop from "./components/CoinShop";
-import LoginScreen from "./components/LoginScreen";
-import AdminDashboard from "./components/AdminDashboard";
-import AdminUsers from "./components/AdminUsers";
-import AdminUserProfile from "./components/AdminUserProfile";
-import AdminGames from "./components/AdminGames";
-import AdminRewards from "./components/AdminRewards";
-import AdminRedemptions from "./components/AdminRedemptions";
-import AdminWallet from "./components/AdminWallet";
-import AdminReferrals from "./components/AdminReferrals";
 
-function MainSite() {
-  const [activeView, setActiveView] = useState("home");
+function readCheckoutReturnFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const view = params.get("view");
+  const checkout = params.get("checkout");
+  const initialView =
+    view === "coins" || checkout
+      ? "coins"
+      : view === "leaderboard"
+        ? "leaderboard"
+        : "home";
+  return {
+    initialView,
+    checkoutReturn:
+      checkout === "success" || checkout === "cancel" ? checkout : null,
+  };
+}
+
+function clearCheckoutQueryParams() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has("checkout") && !url.searchParams.has("view")) {
+    return;
+  }
+  url.searchParams.delete("checkout");
+  url.searchParams.delete("view");
+  const next = url.pathname + url.search + url.hash;
+  window.history.replaceState({}, "", next || "/");
+}
+
+function App() {
+  const [boot] = useState(readCheckoutReturnFromUrl);
+  const [activeView, setActiveView] = useState(boot.initialView);
+  const [checkoutReturn, setCheckoutReturn] = useState(boot.checkoutReturn);
+
+  useEffect(() => {
+    if (boot.checkoutReturn) {
+      clearCheckoutQueryParams();
+    }
+  }, [boot.checkoutReturn]);
+
+  function handleNavigate(view) {
+    setActiveView(view);
+    if (view !== "coins") {
+      setCheckoutReturn(null);
+    }
+  }
 
   return (
     <div>
-      <Navbar activeView={activeView} onNavigate={setActiveView} />
+      <Navbar activeView={activeView} onNavigate={handleNavigate} />
 
       <div className="pt-22">
         {activeView === "home" && (
@@ -47,7 +80,9 @@ function MainSite() {
 
         {activeView === "leaderboard" && <GlobalRankings />}
 
-        {activeView === "coins" && <CoinShop />}
+        {activeView === "coins" && (
+          <CoinShop checkoutReturn={checkoutReturn} />
+        )}
 
         <Footer />
       </div>
@@ -55,21 +90,4 @@ function MainSite() {
   );
 }
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<MainSite />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/users" element={<AdminUsers />} />
-      <Route path="/admin/users/:id" element={<AdminUserProfile />} />
-      <Route path="/admin/games" element={<AdminGames />} />
-      <Route path="/admin/rewards" element={<AdminRewards />} />
-      <Route path="/admin/redemptions" element={<AdminRedemptions />} />
-      <Route path="/admin/wallet" element={<AdminWallet />} />
-      <Route path="/admin/referrals" element={<AdminReferrals />} />
-      <Route path="/admin/login" element={<LoginScreen />} />
-    </Routes>
-  );
-}
-
-export default App; 
+export default App;
